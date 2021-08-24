@@ -2,29 +2,37 @@
   <f7-app v-bind="f7params">
     <!-- Right panel with reveal effect-->
     <f7-panel right reveal theme-dark>
-      <f7-view>
+      <f7-view links-view=".view-main">
         <f7-page>
           <f7-navbar title="Right Panel"></f7-navbar>
-          <f7-block>{{ text }}</f7-block>
+
+          <f7-list>
+            <f7-list-item title="About" link="/about/" panel-close></f7-list-item>
+          </f7-list>
         </f7-page>
       </f7-view>
     </f7-panel>
 
     <!-- Your main view, should have "view-main" class -->
-    <f7-view main class="safe-areas" url="/"></f7-view>
+    <f7-view 
+      main 
+      class="safe-areas" 
+      url="/" 
+    ></f7-view>
   </f7-app>
 </template>
-<script>
-import { ref, onMounted } from "vue";
+<script lang="ts">
+import { defineComponent, ref, onMounted } from "vue";
 import { f7, f7ready } from "framework7-vue";
+import { Framework7Parameters } from "framework7/types";
 
-import routes from "../js/routes.js";
+import routes from "./config/router";
 
-export default {
+export default defineComponent({
   setup() {
     // Framework7 Parameters
-    const f7params = {
-      name: "framework7-vue-minimal", // App name
+    const f7params: Framework7Parameters = {
+      name: "framework7-vue-typescript", // App name
       theme: "auto", // Automatic theme detection
       routes: routes, // App routes
       navbar: {
@@ -38,17 +46,14 @@ export default {
       });
     });
 
-    const text = ref("Right panel content goes here");
-
     function helloWorld() {
       console.log('Hello World!');
     }
 
     return {
       f7params,
-      text,
       helloWorld
     };
   },
-};
+});
 </script>

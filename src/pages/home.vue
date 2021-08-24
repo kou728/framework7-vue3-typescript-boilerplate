@@ -20,13 +20,14 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
 import { f7, f7ready } from "framework7-vue";
 
-export default {
+export default defineComponent({
   methods: {
     alertOnClick() {
       f7.dialog.alert("This is a Framework7 alert notification test.", "Alert") 
     },
   },
-};
+});
 </script>

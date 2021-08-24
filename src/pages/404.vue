@@ -7,6 +7,7 @@
     </f7-block>
   </f7-page>
 </template>
-<script>
-  export default {};
+<script lang="ts">
+import { defineComponent } from 'vue';
+  export default defineComponent({});
 </script>

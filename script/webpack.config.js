@@ -27,7 +27,7 @@ module.exports = {
   mode: env,
   target: env === "development" ? "web" : "browserslist",
   entry: {
-    app: './src/js/app.js',
+    app: './src/main.ts',
   },
   output: {
     path: resolvePath('www'),
@@ -38,7 +38,7 @@ module.exports = {
     hotUpdateMainFilename: 'hot/hot-update.json',
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.ts', '.vue', '.json'],
     alias: {
       '@': resolvePath('src'),
     },
@@ -55,8 +55,8 @@ module.exports = {
     historyApiFallback: true,
     proxy: {
       '/monaca_terminal': {
-         target: socketPort,
-         ws: wss
+        target: socketPort,
+        ws: wss
       },
     },
   },
@@ -66,6 +66,20 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.ts$/,
+        include: [
+          resolvePath('src'),
+        ],
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              appendTsSuffixTo: [/\.vue$/]
+            },
+          },
+        ],
+      },
       {
         test: /\.(mjs|js|jsx)$/,
         include: [
